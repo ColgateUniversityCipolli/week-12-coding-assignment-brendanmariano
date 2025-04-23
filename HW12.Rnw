@@ -168,9 +168,45 @@ for(i in 1:1000){
 @
     \item What proportion of the time do we make an error of Type I for a
     two-tailed test?
+    <<size = "scriptsize">>=
+###########
+#2.c
+
+#Beta(10,2)
+totalc1 = 0
+for(i in 1:1000){
+  datc1 = rbeta(n = 15, shape1 = 10, shape2 = 2)
+  c1 = t.test(datc1, alternative = "two.sided", mu = actual.mean1)
+  if(c1$p.value < .05){
+    totalc1 = totalc1 + 1
+  }
+}
+(type1.errorc1 = totalc1/1000)
+#Beta(2,10)
+total.c2 = 0
+for(i in 1:1000){
+  dat.c2 = rbeta(n = 15, shape1 = 2, shape2 = 10)
+  c2 = t.test(dat.c2, alternative = "two.sided", mu = actual.mean2)
+  if(c2$p.value < .05){
+    total.c2 = total.c2 + 1
+  }
+}
+(type1.error.c2 = total.c2/1000)
+#Beta(10,10)
+total.c3 = 0
+for(i in 1:1000){
+  dat.c3 = rbeta(n = 15, shape1 = 10, shape2 = 10)
+  c3 = t.test(dat.c3, alternative = "two.sided", mu = actual.mean3)
+  if(c3$p.value < .05){
+    total.c3 = total.c3 + 1
+  }
+}
+(type1.error.c3 = total.c3/1000)
+@
     \item How does skewness of the underlying population distribution effect
     Type I error across the test types?
-    It impacts the Type1 error for one sided tests. If a population distribution is skewed to the right, then there will be a cluster of data on the left which causes a greater type 1 error for a left sided t-test. The same applies for a right sided t.test if the data is skewed left. For two sided tests, the type 1 error isn't impacted because both sides are measured which ultimately causes the same overall p-value and type 1 error. 
+    
+    \textbf{It impacts the Type1 error for one sided tests. If a population distribution is skewed to the right, then there will be a cluster of data on the left which causes a greater type 1 error for a left sided t-test. The same applies for a right sided t.test if the data is skewed left. For two sided tests, the type 1 error isn't impacted because both sides are measured which ultimately causes the same overall p-value and type 1 error. }
   \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

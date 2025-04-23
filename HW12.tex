@@ -143,7 +143,7 @@ alternative.
 \hldef{(proportion.type1} \hlkwb{=} \hldef{type1.cnt}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.064
+## [1] 0.079
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -184,7 +184,7 @@ alternative.
 \hldef{(type1.error.b1} \hlkwb{=} \hldef{total.b1}\hlopt{/}\hlnum{1000}\hldef{)} \hlcom{#Proportion of type1 errors}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.033
+## [1] 0.023
 \end{verbatim}
 \begin{alltt}
 \hldef{total.b2} \hlkwb{=} \hlnum{0}
@@ -198,7 +198,7 @@ alternative.
 \hldef{(type1.error.b2} \hlkwb{=} \hldef{total.b2}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.086
+## [1] 0.102
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta (10,10)}
@@ -213,7 +213,7 @@ alternative.
 \hldef{(type1.error.b3} \hlkwb{=} \hldef{total.b3}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.054
+## [1] 0.056
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -235,7 +235,7 @@ alternative.
 \hldef{(type1.error.a1} \hlkwb{=} \hldef{total.a1}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.067
+## [1] 0.086
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta(2,10)}
@@ -250,7 +250,7 @@ alternative.
 \hldef{(type1.error.a2} \hlkwb{=} \hldef{total.a2}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.027
+## [1] 0.024
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta(10,10)}
@@ -265,15 +265,68 @@ alternative.
 \hldef{(type1.error.a3} \hlkwb{=} \hldef{total.a3}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.039
+## [1] 0.057
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
     \item What proportion of the time do we make an error of Type I for a
     two-tailed test?
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{###########}
+\hlcom{#2.c}
+
+\hlcom{#Beta(10,2)}
+\hldef{totalc1} \hlkwb{=} \hlnum{0}
+\hlkwa{for}\hldef{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hldef{)\{}
+  \hldef{datc1} \hlkwb{=} \hlkwd{rbeta}\hldef{(}\hlkwc{n} \hldef{=} \hlnum{15}\hldef{,} \hlkwc{shape1} \hldef{=} \hlnum{10}\hldef{,} \hlkwc{shape2} \hldef{=} \hlnum{2}\hldef{)}
+  \hldef{c1} \hlkwb{=} \hlkwd{t.test}\hldef{(datc1,} \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{,} \hlkwc{mu} \hldef{= actual.mean1)}
+  \hlkwa{if}\hldef{(c1}\hlopt{$}\hldef{p.value} \hlopt{<} \hlnum{.05}\hldef{)\{}
+\hldef{totalc1} \hlkwb{=} \hldef{totalc1} \hlopt{+} \hlnum{1}
+  \hldef{\}}
+\hldef{\}}
+\hldef{(type1.errorc1} \hlkwb{=} \hldef{totalc1}\hlopt{/}\hlnum{1000}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.064
+\end{verbatim}
+\begin{alltt}
+\hlcom{#Beta(2,10)}
+\hldef{total.c2} \hlkwb{=} \hlnum{0}
+\hlkwa{for}\hldef{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hldef{)\{}
+  \hldef{dat.c2} \hlkwb{=} \hlkwd{rbeta}\hldef{(}\hlkwc{n} \hldef{=} \hlnum{15}\hldef{,} \hlkwc{shape1} \hldef{=} \hlnum{2}\hldef{,} \hlkwc{shape2} \hldef{=} \hlnum{10}\hldef{)}
+  \hldef{c2} \hlkwb{=} \hlkwd{t.test}\hldef{(dat.c2,} \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{,} \hlkwc{mu} \hldef{= actual.mean2)}
+  \hlkwa{if}\hldef{(c2}\hlopt{$}\hldef{p.value} \hlopt{<} \hlnum{.05}\hldef{)\{}
+\hldef{total.c2} \hlkwb{=} \hldef{total.c2} \hlopt{+} \hlnum{1}
+  \hldef{\}}
+\hldef{\}}
+\hldef{(type1.error.c2} \hlkwb{=} \hldef{total.c2}\hlopt{/}\hlnum{1000}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.076
+\end{verbatim}
+\begin{alltt}
+\hlcom{#Beta(10,10)}
+\hldef{total.c3} \hlkwb{=} \hlnum{0}
+\hlkwa{for}\hldef{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hldef{)\{}
+  \hldef{dat.c3} \hlkwb{=} \hlkwd{rbeta}\hldef{(}\hlkwc{n} \hldef{=} \hlnum{15}\hldef{,} \hlkwc{shape1} \hldef{=} \hlnum{10}\hldef{,} \hlkwc{shape2} \hldef{=} \hlnum{10}\hldef{)}
+  \hldef{c3} \hlkwb{=} \hlkwd{t.test}\hldef{(dat.c3,} \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{,} \hlkwc{mu} \hldef{= actual.mean3)}
+  \hlkwa{if}\hldef{(c3}\hlopt{$}\hldef{p.value} \hlopt{<} \hlnum{.05}\hldef{)\{}
+\hldef{total.c3} \hlkwb{=} \hldef{total.c3} \hlopt{+} \hlnum{1}
+  \hldef{\}}
+\hldef{\}}
+\hldef{(type1.error.c3} \hlkwb{=} \hldef{total.c3}\hlopt{/}\hlnum{1000}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.05
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
     \item How does skewness of the underlying population distribution effect
     Type I error across the test types?
-    It impacts the Type1 error for one sided tests. If a population distribution is skewed to the right, then there will be a cluster of data on the left which causes a greater type 1 error for a left sided t-test. The same applies for a right sided t.test if the data is skewed left. For two sided tests, the type 1 error isn't impacted because both sides are measured which ultimately causes the same overall p-value and type 1 error. 
+    
+    \textbf{It impacts the Type1 error for one sided tests. If a population distribution is skewed to the right, then there will be a cluster of data on the left which causes a greater type 1 error for a left sided t-test. The same applies for a right sided t.test if the data is skewed left. For two sided tests, the type 1 error isn't impacted because both sides are measured which ultimately causes the same overall p-value and type 1 error. }
   \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -22,17 +22,19 @@ proportion.type1 = type1.cnt/1000
 #############
 # Part 2
 #2.a
-
+actual.mean1 = 10/(10+2)
+actual.mean2 = 2/(2+10)
+actual.mean3 = 10/(10+10)
 #Beta(10,2)
 total.b1 = 0
 for(i in 1:1000){
   dat.b1 = rbeta(n = 15, shape1 = 10, shape2 = 2)
   b1 = t.test(dat.b1, alternative = "less", mu = actual.mean1)
-  if(b1$p.value < .05){
+  if(b1$p.value < .05){ #Because we know that the null should't be rejected
     total.b1 = total.b1 + 1
   }
 }
-type1.error.b1 = total.b1/1000
+type1.error.b1 = total.b1/1000 #Proportion of type1 errors
 #Beta(2,10)
 total.b2 = 0
 for(i in 1:1000){
@@ -54,9 +56,7 @@ for(i in 1:1000){
 }
 type1.error.b3 = total.b3/1000
 #2.b
-actual.mean1 = 10/(10+2)
-actual.mean2 = 2/(2+10)
-actual.mean3 = 10/(10+10)
+
 
 #Beta(10,2)
 total.a1 = 0
