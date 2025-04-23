@@ -63,15 +63,16 @@ alternative.
   Conduct a simulation study to assess the Type I error rate of this approach.\\
   <<size = "scriptsize">>=
  library(VGAM)
+ #We know that the null distribution (Laplace) resembles the population distribution
  type1.cnt = 0
 for(i in 1:1000){
   dat = rlaplace(n = 30, scale = 4)
   p.20 = t.test(dat[1:20], alternative = "greater")
   p.30 = t.test(dat, alternative = "greater")
-  if(p.20$statistic > t.val){
+  if(p.20$statistic > t.val){ #If value is statistically discernible
     type1.cnt = type1.cnt + 1
   }
-  else if(p.30$statistic>t.val2)
+  else if(p.30$statistic>t.val2) #If value is statistically discernible
   {
     type1.cnt = type1.cnt + 1
   }
@@ -206,7 +207,7 @@ for(i in 1:1000){
     \item How does skewness of the underlying population distribution effect
     Type I error across the test types?
     
-    \textbf{It impacts the Type1 error for one sided tests. If a population distribution is skewed to the right, then there will be a cluster of data on the left which causes a greater type 1 error for a left sided t-test. The same applies for a right sided t.test if the data is skewed left. For two sided tests, the type 1 error isn't impacted because both sides are measured which ultimately causes the same overall p-value and type 1 error. }
+    \textbf{It impacts the Type 1 error for one sided tests. The sample size is not great enough for the central limit theorem to apply for the sample means from the simulations. This causes the skewed populations distributions to have sample mean distributions that are also skewed, which ultimatley impacts our results for a one sided t-test over many simulations since the data is not normal. This is why the right skewed beta distribution has a large Type 1 error (greater than .05) when it does the less than one-sided t-test and why it has a smaller Type 1 error (less than .05) when it does the greater than one-sided t-test. For two-sided t tests, however, the large and small type1 errors on both sides compensate for one another which ultimately causes the Type 1 error to be similar to .05. }
   \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

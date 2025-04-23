@@ -127,15 +127,16 @@ alternative.
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: stats4}}
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: splines}}\begin{alltt}
+ \hlcom{#We know that the null distribution (Laplace) resembles the population distribution}
  \hldef{type1.cnt} \hlkwb{=} \hlnum{0}
 \hlkwa{for}\hldef{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hldef{)\{}
 \hldef{dat} \hlkwb{=} \hlkwd{rlaplace}\hldef{(}\hlkwc{n} \hldef{=} \hlnum{30}\hldef{,} \hlkwc{scale} \hldef{=} \hlnum{4}\hldef{)}
 \hldef{p.20} \hlkwb{=} \hlkwd{t.test}\hldef{(dat[}\hlnum{1}\hlopt{:}\hlnum{20}\hldef{],} \hlkwc{alternative} \hldef{=} \hlsng{"greater"}\hldef{)}
 \hldef{p.30} \hlkwb{=} \hlkwd{t.test}\hldef{(dat,} \hlkwc{alternative} \hldef{=} \hlsng{"greater"}\hldef{)}
-\hlkwa{if}\hldef{(p.20}\hlopt{$}\hldef{statistic} \hlopt{>} \hldef{t.val)\{}
+\hlkwa{if}\hldef{(p.20}\hlopt{$}\hldef{statistic} \hlopt{>} \hldef{t.val)\{} \hlcom{#If value is statistically discernible}
   \hldef{type1.cnt} \hlkwb{=} \hldef{type1.cnt} \hlopt{+} \hlnum{1}
 \hldef{\}}
-\hlkwa{else if}\hldef{(p.30}\hlopt{$}\hldef{statistic}\hlopt{>}\hldef{t.val2)}
+\hlkwa{else if}\hldef{(p.30}\hlopt{$}\hldef{statistic}\hlopt{>}\hldef{t.val2)} \hlcom{#If value is statistically discernible}
 \hldef{\{}
   \hldef{type1.cnt} \hlkwb{=} \hldef{type1.cnt} \hlopt{+} \hlnum{1}
 \hldef{\}}
@@ -143,7 +144,7 @@ alternative.
 \hldef{(proportion.type1} \hlkwb{=} \hldef{type1.cnt}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.079
+## [1] 0.077
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -184,7 +185,7 @@ alternative.
 \hldef{(type1.error.b1} \hlkwb{=} \hldef{total.b1}\hlopt{/}\hlnum{1000}\hldef{)} \hlcom{#Proportion of type1 errors}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.023
+## [1] 0.024
 \end{verbatim}
 \begin{alltt}
 \hldef{total.b2} \hlkwb{=} \hlnum{0}
@@ -198,7 +199,7 @@ alternative.
 \hldef{(type1.error.b2} \hlkwb{=} \hldef{total.b2}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.102
+## [1] 0.085
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta (10,10)}
@@ -213,7 +214,7 @@ alternative.
 \hldef{(type1.error.b3} \hlkwb{=} \hldef{total.b3}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.056
+## [1] 0.057
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -235,7 +236,7 @@ alternative.
 \hldef{(type1.error.a1} \hlkwb{=} \hldef{total.a1}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.086
+## [1] 0.092
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta(2,10)}
@@ -250,7 +251,7 @@ alternative.
 \hldef{(type1.error.a2} \hlkwb{=} \hldef{total.a2}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.024
+## [1] 0.031
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta(10,10)}
@@ -265,7 +266,7 @@ alternative.
 \hldef{(type1.error.a3} \hlkwb{=} \hldef{total.a3}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.057
+## [1] 0.046
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -289,7 +290,7 @@ alternative.
 \hldef{(type1.errorc1} \hlkwb{=} \hldef{totalc1}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.064
+## [1] 0.057
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta(2,10)}
@@ -304,7 +305,7 @@ alternative.
 \hldef{(type1.error.c2} \hlkwb{=} \hldef{total.c2}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.076
+## [1] 0.057
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Beta(10,10)}
@@ -319,14 +320,14 @@ alternative.
 \hldef{(type1.error.c3} \hlkwb{=} \hldef{total.c3}\hlopt{/}\hlnum{1000}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.05
+## [1] 0.062
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
     \item How does skewness of the underlying population distribution effect
     Type I error across the test types?
     
-    \textbf{It impacts the Type1 error for one sided tests. If a population distribution is skewed to the right, then there will be a cluster of data on the left which causes a greater type 1 error for a left sided t-test. The same applies for a right sided t.test if the data is skewed left. For two sided tests, the type 1 error isn't impacted because both sides are measured which ultimately causes the same overall p-value and type 1 error. }
+    \textbf{It impacts the Type 1 error for one sided tests. The sample size is not great enough for the central limit theorem to apply for the sample means from the simulations. This causes the skewed populations distributions to have sample mean distributions that are also skewed, which ultimatley impacts our results for a one sided t-test over many simulations since the data is not normal. This is why the right skewed beta distribution has a large Type 1 error (greater than .05) when it does the less than one-sided t-test and why it has a smaller Type 1 error (less than .05) when it does the greater than one-sided t-test. For two-sided t tests, however, the large and small type1 errors on both sides compensate for one another which ultimately causes the Type 1 error to be similar to .05. }
   \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

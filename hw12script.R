@@ -5,15 +5,16 @@ library(VGAM)
 # 1.b
 (t.val2 = qt(.95, df = 29)) 
 # 1.c
+#We know that the null distribution (Laplace) resembles the population distribution
 type1.cnt = 0
 for(i in 1:1000){
   dat = rlaplace(n = 30, scale = 4)
   p.20 = t.test(dat[1:20], alternative = "greater")
   p.30 = t.test(dat, alternative = "greater")
-  if(p.20$statistic > t.val){
+  if(p.20$statistic > t.val){ #If value is statistically discernible
     type1.cnt = type1.cnt + 1
   }
-  else if(p.30$statistic>t.val2)
+  else if(p.30$statistic>t.val2) #If value is statistically discernible
   {
     type1.cnt = type1.cnt + 1
   }
